@@ -3,7 +3,7 @@ initComplete<%@ page import="org.grails.plugin.easygrid.GridUtils; org.grails.pl
 <g:javascript>
     var oTable = $('#${gridId}').dataTable({
     ${JsUtils.convertToJs(gridConfig.dataTables, gridId, true)},
-    "sAjaxSource": '${g.createLink(controller: attrs.controller, action: "${gridConfig.id}Rows", params: GridUtils.externalParams(gridConfig))}',
+    "sAjaxSource": '${g.createLink(controller: attrs.controller, action: "${gridConfig.id}Rows", params: [gridName: "${gridConfig.id}"] << GridUtils.externalParams(gridConfig))}',
         "fnInitComplete":easygrid.initComplete('${attrs.id}',${gridConfig.fixedColumns == true}, ${gridConfig.noFixedColumns ?: -1}, ${gridConfig.hideSearch}),
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) { },
         "fnServerParams": easygrid.serverParams('${attrs.id}'),

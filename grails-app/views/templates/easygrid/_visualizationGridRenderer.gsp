@@ -1,11 +1,11 @@
 <%@ page import="org.grails.plugin.easygrid.JsUtils" defaultCodec="none" %>
 
 <g:javascript>
-%{--// attach the gid data to the element--}%
+%{--// attach the grid data to the element--}%
     $.data(document.getElementById("${attrs.id}_div"), 'grid',
     {
         options:${JsUtils.convertToJs(gridConfig.visualization, "${attrs.id}_div")},
-        url:'${g.createLink(action: "${gridConfig.id}Rows")}',
+        url:'${g.createLink(action: "${gridConfig.id}Rows", params: [gridName: "${gridConfig.id}"])}',
         loadAll: ${gridConfig.visualization.loadAllData ? 'true' : 'false'}
     });
 

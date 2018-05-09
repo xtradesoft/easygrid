@@ -4,9 +4,9 @@
 <script type="text/javascript">
     $(function() {
         $( "#${attrs.id}" ).selectionComp({
-            urlAjaxAutocomp: "${createLink(controller: attrs.controller, action: "${attrs.gridName}AutocompleteResult")}",
-            urlAjaxSelLabel: "${createLink(controller: attrs.controller, action: "${attrs.gridName}SelectionLabel")}",
-            urlAjaxGrid:    "${createLink(controller: attrs.controller, action: "${attrs.gridName}Html")}",
+            urlAjaxAutocomp: "${createLink(controller: attrs.controller, action: "${attrs.gridName}AutocompleteResult", params: [gridName: "${gridConfig.id}"])}",
+            urlAjaxSelLabel: "${createLink(controller: attrs.controller, action: "${attrs.gridName}SelectionLabel", params: [gridName: "${gridConfig.id}"])}",
+            urlAjaxGrid:    "${createLink(controller: attrs.controller, action: "${attrs.gridName}Html", params: [gridName: "${gridConfig.id}"])}",
             gridName: "${attrs.gridName}" ,
             selButton: "<a href='#'>Sel    <a>",
             labelElement: "<div style='display:inline;'/>",
