@@ -8,35 +8,29 @@ import org.grails.plugin.easygrid.JsUtils
 
 class EasygridGrailsPlugin extends Plugin {
 
-/*    def version = "1.7.2-SNAPSHOT"*/
-
     def grailsVersion = "3.3 > *"
-
     def loadAfter = ['services', 'controllers']
-
     def pluginExcludes = [
-/*
             'grails-app/controllers/org/grails/plugin/easygrid/TestDomainController.groovy',
             'grails-app/domain/org/grails/plugin/easygrid/TestDomain.groovy',
             'grails-app/domain/org/grails/plugin/easygrid/OwnerTest.groovy',
             'grails-app/domain/org/grails/plugin/easygrid/PetTest.groovy',
             'grails-app/services/org/grails/plugin/easygrid/grids/TestGridService.groovy',
             'grails-app/views/templates/easygrid/_testGridRenderer.gsp',
-*/
     ]
 
-//    def dependsOn = [
-//            'jquery-ui': "1.8.14 > *"
-//    ]
+    def dependsOn = [
+            'jquery-ui': "1.8.14 > *"
+    ]
 
     //the location of external grids config - to enable reloading
     def watchedResources = "file:./src/groovy/grids/**/*.groovy"
 
     def observe = ["controllers", "services"]
 
-    def title = "Easygrid Plugin"
-    def author = "Tudor Malene"
-    def authorEmail = "tudor.malene@gmail.com"
+    def title = "Easygrid Plugin Grails 3.x"
+    def author = "Harald Liebetegger"
+    def authorEmail = "harald@nexxchange.com"
     def description = '''
         Provides a declarative way of defining Data Grids.
         It works currently with jqGrid, google visualization and jquery dataTables.
@@ -44,11 +38,11 @@ class EasygridGrailsPlugin extends Plugin {
         It also provides a powerful selection widget ( a direct replacement for drop-boxes )
         '''
 
-    def documentation = "https://github.com/tudor-malene/Easygrid"
+    def documentation = "https://github.com/xtradesoft/easygrid"
 
     def license = "APACHE"
-    def issueManagement = [system: "GITHUB", url: "https://github.com/tudor-malene/Easygrid/issues"]
-    def scm = [url: "https://github.com/tudor-malene/Easygrid"]
+    def issueManagement = [system: "GITHUB", url: "https://github.com/xtradesoft/easygrid/issues"]
+    def scm = [url: "https://github.com/xtradesoft/easygrid"]
 
     void doWithDynamicMethods() { }
 
@@ -78,25 +72,20 @@ class EasygridGrailsPlugin extends Plugin {
     private ConfigObject loadEasygridConfig(GrailsApplication grailsApplication) {
         def config = grailsApplication.config
         GroovyClassLoader classLoader = new GroovyClassLoader(getClass().classLoader)
-
-        // Merging default Easygrid config into main application config
         final ConfigObject defaultEasyGridConfig = new ConfigSlurper(Environment.current.name).parse(classLoader.loadClass('DefaultEasygridConfig'))
         def easyGridConfig
-        // Merging user-defined Easygrid config into main application config if provided
         try {
             easyGridConfig = classLoader.loadClass('EasygridConfig')
         } catch (any) {
             println 'Could not process the EasygridConfig file '
-            // ignore, just use the defaults
         }
 
         if(easyGridConfig) {
-            println 'Merge the easygrid configs... '
             defaultEasyGridConfig.merge(new ConfigSlurper(Environment.current.name).parse(easyGridConfig))
-            println 'Ole!'
+            println 'The custom config and the default config fits!'
         }
         config.put("easygrid", defaultEasyGridConfig.get("easygrid"))
-        println 'We have merged it!'
+        println 'We brought them together!'
 
         return config
     }
