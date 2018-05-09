@@ -9,13 +9,13 @@
 
 <g:javascript>
     jQuery("#${gridId}").jqGrid({
-    url: '${g.createLink(controller: attrs.controller, action: "${gridConfig.id}Rows", params: [gridName: "${gridConfig.id}"] << GridUtils.externalParams(gridConfig))}',
+    url: '${g.createLink(controller: attrs.controller, action: "gridRows", params: [gridName: "${gridConfig.id}"] << GridUtils.externalParams(gridConfig))}',
     loadError: easygrid.loadError,
     pager: '#${pagerId}',
     ${JsUtils.convertToJs(conf - [navGrid: conf.navGrid] - [filterToolbar: conf.filterToolbar], gridId, true)},
     <g:if test="${gridConfig.subGrid}">
         subGrid: true,
-        subGridRowExpanded: easygrid.subGridRowExpanded('${g.createLink(controller: attrs.controller, action: "${gridConfig.subGrid}Html")}'),
+        subGridRowExpanded: easygrid.subGridRowExpanded('${g.createLink(controller: attrs.controller, action: "gridHtml", [gridName: "${gridConfig.subGrid}"])}'),
     </g:if>
     <g:if test="${gridConfig.childGrid}">
         "onSelectRow":easygrid.onSelectGridRowReloadGrid('${gridConfig.childGrid}','${gridConfig.childParamName}'),
