@@ -20,7 +20,7 @@ class EasygridGrailsPlugin extends Plugin {
     ]
 
     def dependsOn = [
-            'jquery-ui': "1.8.14 > *"
+     /*       'jquery-ui': "1.8.14 > *" */
     ]
 
     //the location of external grids config - to enable reloading
