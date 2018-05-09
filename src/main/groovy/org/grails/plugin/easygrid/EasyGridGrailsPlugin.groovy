@@ -19,9 +19,7 @@ class EasygridGrailsPlugin extends Plugin {
             'grails-app/views/templates/easygrid/_testGridRenderer.gsp',
     ]
 
-    def dependsOn = [
-     /*       'jquery-ui': "1.8.14 > *" */
-    ]
+    def dependsOn = [:]
 
     //the location of external grids config - to enable reloading
     def watchedResources = "file:./src/groovy/grids/**/*.groovy"
