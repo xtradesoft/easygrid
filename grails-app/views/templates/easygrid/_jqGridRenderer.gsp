@@ -15,14 +15,14 @@
     ${JsUtils.convertToJs(conf - [navGrid: conf.navGrid] - [filterToolbar: conf.filterToolbar], gridId, true)},
     <g:if test="${gridConfig.subGrid}">
         subGrid: true,
-        subGridRowExpanded: easygrid.subGridRowExpanded('${g.createLink(controller: attrs.controller, action: "gridHtml", [gridName: "${gridConfig.subGrid}"])}'),
+        subGridRowExpanded: easygrid.subGridRowExpanded('${g.createLink(controller: attrs.controller, action: "gridHtml", params: [gridName: "${gridConfig.subGrid}"])}'),
     </g:if>
     <g:if test="${gridConfig.childGrid}">
         "onSelectRow":easygrid.onSelectGridRowReloadGrid('${gridConfig.childGrid}','${gridConfig.childParamName}'),
     </g:if>
     <g:if test="${gridConfig.inlineEdit}">
-        editurl: '${g.createLink(controller: attrs.controller, action: "${gridConfig.id}InlineEdit")}',
-        cellurl: '${g.createLink(controller: attrs.controller, action: "${gridConfig.id}InlineEdit")}',
+        editurl: '${g.createLink(controller: attrs.controller, action: "gridInlineEdit", params: [gridName: "${gridConfig.id}"])}',
+        cellurl: '${g.createLink(controller: attrs.controller, action: "gridInlineEdit", params: [gridName: "${gridConfig.id}"])}',
         ondblClickRow: easygrid.onSelectRowInlineEdit('${gridId}'),
     </g:if>
     colModel: [
